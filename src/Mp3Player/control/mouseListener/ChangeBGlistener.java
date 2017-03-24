@@ -1,4 +1,4 @@
-package control.mouseListener;
+package Mp3Player.control.mouseListener;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -7,7 +7,8 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 
-import view.littleView.IconPanel;
+import Mp3Player.view.littleView.IconPanel;
+
 /**
  * 小按钮，鼠标移上或移出以及点击时触发的动作
  * @author Berry
@@ -35,7 +36,7 @@ public class ChangeBGlistener implements MouseListener,MouseMotionListener{
 			
 			break;
 		case 2:
-			view.MainView.frame.setExtendedState(JFrame.ICONIFIED);
+			Mp3Player.view.MainView.frame.setExtendedState(JFrame.ICONIFIED);
 			break;
 		default:
 			break;

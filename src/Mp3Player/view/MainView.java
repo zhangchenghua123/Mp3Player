@@ -1,4 +1,4 @@
-package view;
+package Mp3Player.view;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -19,11 +19,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import control.mouseListener.ChangeBGlistener;
-import control.mouseListener.ChangeLocationListener;
-import control.mouseListener.fda;
+import Mp3Player.control.mouseListener.ChangeBGlistener;
+import Mp3Player.control.mouseListener.ChangeLocationListener;
+import Mp3Player.view.littleView.IconPanel;
 
-import view.littleView.IconPanel;
+
 
 public  class MainView {
 
@@ -63,7 +63,7 @@ public  class MainView {
 		titlePanel.setBorder(BorderFactory.createEtchedBorder());
 //		frame.setBackground(Color.BLUE);
 		
-		iconPanel=new IconPanel(1,"./src/image/music.png","./src/image/music.png");
+		iconPanel=new IconPanel(1,"./src/Mp3Player/image/music.png","./src/Mp3Player/image/music.png");
 		iconPanel.setPreferredSize(new Dimension(64, 64));
 		littlePanel=new IconPanel(2,"./src/image/little_active.png","./src/image/little_unactive.png");
 		littlePanel.setPreferredSize(new Dimension(32, 32));

@@ -1,4 +1,4 @@
-package view;
+package Mp3Player.view;
 
 import java.awt.BorderLayout;
 import java.awt.Button;

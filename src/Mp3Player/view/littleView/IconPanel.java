@@ -1,4 +1,4 @@
-package view.littleView;
+package Mp3Player.view.littleView;
 
 import java.awt.Color;
 import java.awt.Graphics;
