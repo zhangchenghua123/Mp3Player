@@ -32,12 +32,14 @@ public class ChangeBGlistener implements MouseListener,MouseMotionListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		switch (((IconPanel)e.getComponent()).getId()) {
-		case 1: //应用程序图标
+		case 0: //应用程序图标
 			
 			break;
-		case 2:
+		case 1:
 			Mp3Player.view.MainView.frame.setExtendedState(JFrame.ICONIFIED);
 			break;
+		case 2:
+			System.exit(0);
 		default:
 			break;
 		}
