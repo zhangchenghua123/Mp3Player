@@ -1,14 +1,12 @@
 package Mp3Player.view;
 
-import java.awt.BorderLayout;
+
 import java.awt.Button;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Label;
 
-import java.awt.Panel;
+
+
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -45,7 +43,6 @@ public class GeciWindow {
 		JPanel p1=new JPanel();
 		p1.setOpaque(true);
 		p1.setLayout(null);
-		JPanel p2=new JPanel();
 		label=new JLabel("qqqqq");
 		label.setOpaque(false);
 //		label.setBackground(new Color(50,50,250,50));

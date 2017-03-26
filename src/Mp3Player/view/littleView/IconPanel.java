@@ -1,11 +1,8 @@
 package Mp3Player.view.littleView;
 
-import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Transparency;
-import java.awt.image.BufferedImage;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -13,6 +10,10 @@ import javax.swing.JPanel;
 
 
 public class IconPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean isActivite;
 	private URL img_active_url;
 	private URL img_unactive_url;

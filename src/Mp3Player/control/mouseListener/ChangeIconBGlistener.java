@@ -1,12 +1,12 @@
 package Mp3Player.control.mouseListener;
 
-import java.awt.Point;
+
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
 import javax.swing.JFrame;
-
+import Mp3Player.control.action.pullMenu_onTitle;
 import Mp3Player.view.littleView.IconPanel;
 
 /**
@@ -14,7 +14,7 @@ import Mp3Player.view.littleView.IconPanel;
  * @author Berry
  *
  */
-public class ChangeBGlistener implements MouseListener,MouseMotionListener{
+public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -32,8 +32,10 @@ public class ChangeBGlistener implements MouseListener,MouseMotionListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		switch (((IconPanel)e.getComponent()).getId()) {
-		case 0: //应用程序图标
-			
+		case 0: //标题栏的下拉菜单
+			pullMenu_onTitle  pMenu_onTitle=new pullMenu_onTitle();
+//			Mp3Player.view.MainView.frame.add(pMenu_onTitle);
+			pMenu_onTitle.show(e.getComponent() , 0, 48);
 			break;
 		case 1:
 			Mp3Player.view.MainView.frame.setExtendedState(JFrame.ICONIFIED);
