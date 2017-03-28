@@ -2,6 +2,7 @@ package Mp3Player.model;
 
 import java.awt.Container;
 import java.awt.Point;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,22 +15,25 @@ import Mp3Player.view.littleView.JLabelOnLeftPanel;
 public class Components {
 	
 	public static JFrame frame;
-	public static Container mainContainer;//È«²¿µÄÇøÓò
-	public static JPanel titlePanel;//±êÌâÀ¸
+	public static Container mainContainer;//å…¨éƒ¨çš„åŒºåŸŸ
+	public static JPanel titlePanel;//æ ‡é¢˜æ 
 	
-	public static IconPanel iconPanel;//Ó¦ÓÃ³ÌĞòÍ¼±ê
-	public static IconPanel pullPanel;//ÏÂÀ­²Ëµ¥
-	public static IconPanel littlePanel;//×îĞ¡»¯Í¼±ê
-	public static IconPanel closePanel;//¹Ø±ÕÍ¼±ê
-	public static JPanel bodyPanel; //³ıÁË±êÌâÀ¸µÄ²¿·Ö£¬·ÖÈı¸öÇøÓò£¬left£¬right£¬bottom
-	public static JPanel leftPanel; //×ó²àµÄÁĞ±íÀ¸
-	public static JPanel rightPanel;//ÓÒ²àµÄ¸èÇúÀ¸
-	public static JPanel bottompPanel;//ÏÂ±ßµÄ²¥·ÅÀ¸
-	//×óÃæ°åµÄ¶«Î÷
+	public static IconPanel iconPanel;//åº”ç”¨ç¨‹åºå›¾æ ‡
+	public static IconPanel pullPanel;//ä¸‹æ‹‰èœå•
+	public static IconPanel littlePanel;//æœ€å°åŒ–å›¾æ ‡
+	public static IconPanel closePanel;//å…³é—­å›¾æ ‡
+	public static JPanel bodyPanel; //é™¤äº†æ ‡é¢˜æ çš„éƒ¨åˆ†ï¼Œåˆ†ä¸‰ä¸ªåŒºåŸŸï¼Œleftï¼Œrightï¼Œbottom
+	public static JPanel leftPanel; //å·¦ä¾§çš„åˆ—è¡¨æ 
+	public static JPanel rightPanel;//å³ä¾§çš„æ­Œæ›²æ 
+	public static JPanel bottompPanel;//ä¸‹è¾¹çš„æ’­æ”¾æ 
+	
+	//å·¦é¢æ¿çš„ä¸œè¥¿
 	public static JLabel myMusic;
 	public static JLabel mySongSheet;
 	public static JScrollPane sheetScrollPane;
 	public static JPanel sheetPanel;
 	public static IconPanel addSheet;
+	public static ArrayList<String> mySongSheetList;
+	public static JScrollPane jscrolJanel;
 	
 }

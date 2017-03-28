@@ -9,11 +9,11 @@ public class OurValue {
 
 	static JLabelOnLeftPanel lastActivelabel;
 	/**
-	 * »ñÈ¡Èí¼ş×ÖÌå
+	 * è·å–è½¯ä»¶å­—ä½“
 	 * @return
 	 */
 	public static Font getFont() {
-		return new Font("Î¢ÈíÑÅºÚ",Font.PLAIN,20);	
+		return new Font("å¾®è½¯é›…é»‘",Font.PLAIN,20);	
 	}
 	/**
 	 * 
@@ -22,6 +22,7 @@ public class OurValue {
 //	public static Color getColor(){
 //		
 //	}
+	
 	public static JLabelOnLeftPanel getLastActiveLabel(){
 		return lastActivelabel;
 	}

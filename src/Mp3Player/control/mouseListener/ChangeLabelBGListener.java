@@ -12,8 +12,8 @@ import Mp3Player.GetResourceClass;
 import Mp3Player.model.OurValue;
 import Mp3Player.view.littleView.JLabelOnLeftPanel;
 /**
- * ×ó²àÁĞ±íÏÔÊ¾labelµÄ¼àÌıÊÂ¼ş
- * Êó±êÒÆÉÏÒÆ³ö¼°µã»÷Ê±µÄ¶¯×÷
+ * å·¦ä¾§åˆ—è¡¨æ˜¾ç¤ºlabelçš„ç›‘å¬äº‹ä»¶
+ * é¼ æ ‡ç§»ä¸Šç§»å‡ºåŠç‚¹å‡»æ—¶çš„åŠ¨ä½œ
  * 
  * @author Berry
  *
@@ -37,7 +37,7 @@ public class ChangeLabelBGListener implements MouseListener,
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		JLabelOnLeftPanel label;
-		//»Ö¸´ÉÏÒ»¸öµã»÷µÄlabel
+		//æ¢å¤ä¸Šä¸€ä¸ªç‚¹å‡»çš„label
 		label=OurValue.getLastActiveLabel();
 		if(label!=null){
 			if(label.getId()==((JLabelOnLeftPanel)(e.getComponent())).getId())
@@ -56,7 +56,7 @@ public class ChangeLabelBGListener implements MouseListener,
 			label.setBackground(null);
 			label.repaint();
 		}
-		//ĞŞ¸Äµ±Ç°µã»÷µÄlabel
+		//ä¿®æ”¹å½“å‰ç‚¹å‡»çš„label
 		label=(JLabelOnLeftPanel)(e.getComponent());
 		OurValue.setLastActionLabel(label);
 		switch (label.getId()) {
@@ -97,6 +97,7 @@ public class ChangeLabelBGListener implements MouseListener,
 		}
 	}
 
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub

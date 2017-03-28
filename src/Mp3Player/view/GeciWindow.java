@@ -23,6 +23,7 @@ public class GeciWindow {
 	static JFrame frame;
 	static Point originPoint;
 	static JLabel label;
+	
 	/**
 	 * @param args
 	 */

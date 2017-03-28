@@ -7,19 +7,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.JDialog;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
+import Mp3Player.GetResourceClass;
 import Mp3Player.control.action.pullMenu_onTitle;
+import Mp3Player.control.file.MySheets;
+import Mp3Player.model.Components;
+import Mp3Player.model.OurValue;
 import Mp3Player.view.littleView.AddSheetDialog;
 import Mp3Player.view.littleView.IconPanel;
+import Mp3Player.view.littleView.JLabelOnLeftPanel;
 
 /**
- * ´øÍ¼±êµÄĞ¡°´Å¥µÄ¼àÌıÊÂ¼ş
- * Êó±êÒÆÉÏ»òÒÆ³öÒÔ¼°µã»÷Ê±´¥·¢µÄ¶¯×÷
+ * å¸¦å›¾æ ‡çš„å°æŒ‰é’®çš„ç›‘å¬äº‹ä»¶
+ * é¼ æ ‡ç§»ä¸Šæˆ–ç§»å‡ºä»¥åŠç‚¹å‡»æ—¶è§¦å‘çš„åŠ¨ä½œ
  * @author Berry
  *
  */
@@ -41,21 +43,42 @@ public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		switch (((IconPanel)e.getComponent()).getId()) {
-		case 0: //±êÌâÀ¸µÄÏÂÀ­²Ëµ¥
+		case 0: //æ ‡é¢˜æ çš„ä¸‹æ‹‰èœå•
 			pullMenu_onTitle  pMenu_onTitle=new pullMenu_onTitle();
 //			Mp3Player.view.MainView.frame.add(pMenu_onTitle);
 			pMenu_onTitle.show(e.getComponent() , 0, 48);
 			break;
-		case 1://×îĞ¡»¯°´Å¥
+		case 1://æœ€å°åŒ–æŒ‰é’®
 			Mp3Player.model.Components.frame.setExtendedState(JFrame.ICONIFIED);
 			break;
-		case 2://¹Ø±Õ°´Å¥
+		case 2://å…³é—­æŒ‰é’®
 			System.exit(0);
-		case 3://Ìí¼Ó¸èµ¥°´Å¥
-			AddSheetDialog dialog=new AddSheetDialog(Mp3Player.model.Components.frame,"Ìí¼ÓĞÂÁĞ±í");
+		case 3://æ·»åŠ æ­Œå•æŒ‰é’®
+			AddSheetDialog dialog=new AddSheetDialog(Mp3Player.model.Components.frame,"æ·»åŠ æ–°åˆ—è¡¨");
 			
 			dialog.setVisible(true);
+			System.out.println("bbb");
+			if(dialog.isRight()){
+				System.out.println("ccc");
+				MySheets.AddSheet(dialog.getName());
+				int size=Components.mySongSheetList.size();
+				JLabelOnLeftPanel label=new JLabelOnLeftPanel(size+4,Components.mySongSheetList.get(size-1));
+				label.setFont(OurValue.getFont());
+				label.setOpaque(true);
+				label.setBounds(30, 40*(size-1), 220, 40);
+				label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/local_unactive.png")));
+				label.addMouseListener(new ChangeLabelBGListener());
+				label.addMouseMotionListener(new ChangeLabelBGListener());
+				Components.sheetPanel.setPreferredSize(new Dimension(220,Components.mySongSheetList.size()*40));
+				Components.sheetPanel.add(label);
+				
+				Components.sheetPanel.validate();
+				Components.jscrolJanel.validate();
+				Components.jscrolJanel.repaint();
+				Components.jscrolJanel.getVerticalScrollBar().setValue(size*40);
+			}
 		default:
+			
 			break;
 		}
 	}

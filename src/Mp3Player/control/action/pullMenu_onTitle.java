@@ -58,6 +58,7 @@ public class pullMenu_onTitle extends JPopupMenu{
 				}
 			}
 		});
+		
 		openFolder.addActionListener(new ActionListener() {
 			
 			@Override

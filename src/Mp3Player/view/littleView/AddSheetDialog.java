@@ -14,9 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Mp3Player.model.Components;
 import Mp3Player.model.OurValue;
 /**
- * Ìí¼ÓÁĞ±íÊ±³öÏÖµÄ¶Ô»°¿ò
+ * æ·»åŠ åˆ—è¡¨æ—¶å‡ºç°çš„å¯¹è¯æ¡†
  * @author Berry
  *
  */
@@ -27,23 +28,25 @@ public class AddSheetDialog extends JDialog {
 	JLabel showinfoLabel;
 	JButton yesbButton;
 	JButton cancelButton;
+	boolean isright;
 	public AddSheetDialog(Frame owner, String title){
 		super(owner,title);
+		isright=false;
 		setBounds(Mp3Player.model.Components.frame.getX()+300,
 				Mp3Player.model.Components.frame.getY()+ 200, 300, 200);
 		setModal(true);
 		setResizable(false);
 		panel=new JPanel();
 		panel.setLayout(null);
-		label=new JLabel("ÇëÌîĞ´ÁĞ±íÃû£º");
+		label=new JLabel("è¯·å¡«å†™åˆ—è¡¨åï¼š");
 		label.setBounds(20,30,200,30);
 		label.setFont(OurValue.getFont());
 		nameField=new JTextField();
 		nameField.setBounds(45, 65, 150, 30);
 		nameField.setColumns(20);
-		yesbButton=new JButton("È·¶¨");
+		yesbButton=new JButton("ç¡®å®š");
 		yesbButton.setBounds(25, 100, 80, 30);
-		cancelButton=new JButton("È¡Ïû");
+		cancelButton=new JButton("å–æ¶ˆ");
 		cancelButton.setBounds(130, 100, 80, 30);
 		showinfoLabel=new JLabel("");
 		showinfoLabel.setBounds(200, 125, 200, 30);
@@ -56,7 +59,7 @@ public class AddSheetDialog extends JDialog {
 //		panel.setPreferredSize(new Dimension(300, 200));
 		setContentPane(panel);
 		/**
-		 * µã»÷È·¶¨°´Å¥
+		 * ç‚¹å‡»ç¡®å®šæŒ‰é’®
 		 */
 		yesbButton.addActionListener(new ActionListener() {
 			
@@ -64,23 +67,33 @@ public class AddSheetDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(nameField.getText().equals("")){
-					showinfoLabel.setText("Ãû³Æ²»ÄÜÎª¿Õ£¡");
+					showinfoLabel.setText("åç§°ä¸èƒ½ä¸ºç©ºï¼");
 					showinfoLabel.repaint();
 				}
 				else {
 					/**
 					 * 
-					 * ÅĞ¶ÏÊÇ·ñÓĞÖØ¸´
-					 * Èç¹ûÓĞ£¬showinfolabelÌáÊ¾´íÎó
-					 * Èç¹ûÃ»ÓĞ£¬Ìí¼Ó³É¹¦
+					 * åˆ¤æ–­æ˜¯å¦æœ‰é‡å¤
+					 * å¦‚æœæœ‰ï¼Œshowinfolabelæç¤ºé”™è¯¯
+					 * å¦‚æœæ²¡æœ‰ï¼Œæ·»åŠ æˆåŠŸ
 					 */
-					
-					
+					int i=0;
+					for(;i<Components.mySongSheetList.size();i++){
+						if(Components.mySongSheetList.get(i).equals(nameField.getText())){
+							showinfoLabel.setText("è¯¥åˆ—è¡¨å·²å­˜åœ¨ï¼");
+							showinfoLabel.repaint();
+							break;
+						}
+					}
+					if(i==Components.mySongSheetList.size()){//æ²¡æœ‰æ‰¾åˆ°é‡å¤çš„
+						isright=true;
+						getthis().setVisible(false);
+					}
 				}
 			}
 		});
 		/**
-		 * µã»÷È¡Ïû°´Å¥
+		 * ç‚¹å‡»å–æ¶ˆæŒ‰é’®
 		 */
 		cancelButton.addActionListener(new ActionListener() {
 			
@@ -95,11 +108,15 @@ public class AddSheetDialog extends JDialog {
 		return this;
 	}
 	/**
-	 * ¶Ô»°¿ò¹Ø±Õ£¨setvisible£¨false£©£©ºó£¬µ÷ÓÃ´Ëº¯Êı·µ»Ø½á¹û
-	 * È¡Ïû»ò¹Ø±Õ¶Ô»°¿ò£¬·µ»Ø¡°¡±
-	 * È·¶¨£¬·µ»Ø²»ÊÇ¿Õ
+	 * å¯¹è¯æ¡†å…³é—­ï¼ˆsetvisibleï¼ˆfalseï¼‰ï¼‰åï¼Œè°ƒç”¨æ­¤å‡½æ•°è¿”å›ç»“æœ
+	 * å–æ¶ˆæˆ–å…³é—­å¯¹è¯æ¡†ï¼Œè¿”å›â€œâ€
+	 * ç¡®å®šï¼Œè¿”å›ä¸æ˜¯ç©º
 	 */
 	public String getName(){
 		return nameField.getText();
 	}
+	public boolean isRight(){
+		return isright;
+	}
+	
 }

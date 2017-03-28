@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/Mp3Player/control/action/pullMenu_onTitle.java=UTF-8
+encoding//src/Mp3Player/control/file/MySheets.java=UTF-8
+encoding//src/Mp3Player/control/file/MySongList.java=UTF-8
+encoding//src/Mp3Player/control/mouseListener/ChangeIconBGlistener.java=UTF-8
+encoding//src/Mp3Player/control/mouseListener/ChangeLabelBGListener.java=UTF-8
+encoding//src/Mp3Player/control/mouseListener/ChangeLocationListener.java=UTF-8
+encoding//src/Mp3Player/model/Components.java=UTF-8
+encoding//src/Mp3Player/model/OurValue.java=UTF-8
+encoding//src/Mp3Player/view/GeciWindow.java=UTF-8
+encoding//src/Mp3Player/view/MainView.java=UTF-8
+encoding//src/Mp3Player/view/littleView/AddSheetDialog.java=UTF-8
+encoding//src/Mp3Player/view/littleView/IconPanel.java=UTF-8
+encoding//src/Mp3Player/view/littleView/JLabelOnLeftPanel.java=UTF-8
+encoding/<project>=UTF-8

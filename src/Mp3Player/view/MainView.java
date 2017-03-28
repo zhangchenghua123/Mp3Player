@@ -23,10 +23,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import Mp3Player.GetResourceClass;
+import Mp3Player.control.Init;
 import Mp3Player.control.mouseListener.ChangeIconBGlistener;
 import Mp3Player.control.mouseListener.ChangeLabelBGListener;
 import Mp3Player.control.mouseListener.ChangeLocationListener;
@@ -47,13 +49,14 @@ public  class MainView {
 	 * @param args
 	 */
 	public MainView(){
-		//³õÊ¼»¯frame
+		//åˆå§‹åŒ–frame
+		
 		Components.frame=new JFrame("Mp3Player");
 		originPoint=new Point();
 		Components.frame.setSize(1280, 800);
 		Components.frame.setUndecorated(true);
 		Components.frame.setIconImage((new ImageIcon(GetResourceClass.class.getResource("image/music.png"))).getImage());
-		//ÖØ¶¨Òåcontainer
+		//é‡å®šä¹‰container
 		Components.mainContainer =new Container();
 		Components.mainContainer.setSize(1280, 800);
 		Components.mainContainer.setLayout(null);
@@ -75,10 +78,11 @@ public  class MainView {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Init.initialization();
 		new MainView();
 	}
 	public void addtitleBar(){
-		//³õÊ¼»¯titlePanel
+		//åˆå§‹åŒ–titlePanel
 				img_active_url = GetResourceClass.class.getResource("image/title_bg.jpg");
 				Components.titlePanel=new IconPanel(-1,img_active_url,img_active_url);
 				Components.titlePanel.setOpaque(true ); 
@@ -119,8 +123,6 @@ public  class MainView {
 				Components.closePanel.addMouseListener(new ChangeIconBGlistener());
 				Components.closePanel.addMouseMotionListener(new ChangeIconBGlistener());
 				
-//				iconPanel.setBounds(10, 20, 32, 32);
-//				iconPanel.setOpaque(true);
 				
 				GridBagLayout layout=new GridBagLayout();
 				Components.titlePanel.setLayout(layout);
@@ -199,7 +201,7 @@ public  class MainView {
 	}
 	public void addLeftTopPanel(){
 		Components.leftPanel.setLayout(null);
-		Components.myMusic=new JLabel("ÎÒµÄÒôÀÖ");
+		Components.myMusic=new JLabel("æˆ‘çš„éŸ³ä¹");
 		Components.myMusic.setFont(OurValue.getFont());
 		Components.myMusic.setForeground(new Color(196,196,196));
 		Components.myMusic.setBounds(0,0,250,60);
@@ -208,15 +210,15 @@ public  class MainView {
 		
 		ArrayList<Map<String, String>> lefttopList=new ArrayList<Map<String,String>>();
 		HashMap<String, String> map1=new HashMap<String, String>();
-		map1.put("name", "ÎÒÏ²»¶");
+		map1.put("name", "æˆ‘å–œæ¬¢");
 		map1.put("location", "image/mylike_unactive.png");
 		lefttopList.add(map1);
 		HashMap<String, String> map2=new HashMap<String, String>();
-		map2.put("name", "²¥·ÅÀúÊ·");
+		map2.put("name", "æ’­æ”¾å†å²");
 		map2.put("location", "image/history_unactive.png");
 		lefttopList.add(map2);
 		HashMap<String, String> map3=new HashMap<String, String>();
-		map3.put("name", "±¾µØ¸èÇú");
+		map3.put("name", "æœ¬åœ°æ­Œæ›²");
 		map3.put("location", "image/local_unactive.png");
 		lefttopList.add(map3);
 		for(int i=0;i<lefttopList.size();i++){
@@ -232,7 +234,7 @@ public  class MainView {
 		}
 	}
 	public void addLeftBottomPanel(){
-		Components.mySongSheet=new JLabel("ÎÒµÄ¸èµ¥");
+		Components.mySongSheet=new JLabel("æˆ‘çš„æ­Œå•");
 		Components.mySongSheet.setFont(OurValue.getFont());
 		Components.mySongSheet.setForeground(new Color(196,196,196));
 		Components.mySongSheet.setBounds(0,180,150,60);
@@ -244,30 +246,27 @@ public  class MainView {
 		img_unactive_url = GetResourceClass.class.getResource("image/addSheet_unactive.png");
 		Components.addSheet=new IconPanel(3, img_active_url, img_unactive_url);
 		Components.addSheet.setBounds(170, 200, 32, 32);
-//		Components.addSheet.setBorder(new EmptyBorder(20,30,5,5));
 		Components.addSheet.addMouseListener(new ChangeIconBGlistener());
 		Components.addSheet.addMouseMotionListener(new ChangeIconBGlistener());
 		Components.leftPanel.add(Components.addSheet);
 		Components.sheetPanel=new JPanel();
-		Components.sheetPanel.setLocation(new Point(30,240));//setBounds(0, 240, 250, 250);
-		Components.sheetPanel.setPreferredSize(new Dimension(230,1000));
-		Components.sheetPanel.setLayout(new GridLayout(20,1));
-		for(int i=0;i<5;i++){
-			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i+4,"¸èµ¥"+i);
+		Components.sheetPanel.setLocation(new Point(0,240));
+		Components.sheetPanel.setPreferredSize(new Dimension(220,Components.mySongSheetList.size()*40));
+		Components.sheetPanel.setLayout(null);
+		for(int i=0;i<Components.mySongSheetList.size();i++){
+			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i+4,Components.mySongSheetList.get(i));
 			label.setFont(OurValue.getFont());
 			label.setOpaque(true);
-			label.setBounds(0, 240+40*i, 230, 40);
+			label.setBounds(30, 40*i, 220, 40);
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/local_unactive.png")));
-//			label.setBorder(new EmptyBorder(0,30,0,0));
 			label.addMouseListener(new ChangeLabelBGListener());
 			label.addMouseMotionListener(new ChangeLabelBGListener());
 			Components.sheetPanel.add(label);
 		}
-		JScrollPane jscrolJanel = new JScrollPane(Components.sheetPanel);
-		jscrolJanel.setBounds(30, 240, 250, 250);
-		jscrolJanel.setBorder(null);
-//		jscrolJanel.setViewportView(Components.sheetPanel);
-		Components.leftPanel.add(jscrolJanel);
+		Components.jscrolJanel = new JScrollPane(Components.sheetPanel);
+		Components.jscrolJanel.setBounds(0, 240, 250, 250);
+		Components.jscrolJanel.setBorder(new EmptyBorder(0,0,0,0));
+		Components.leftPanel.add(Components.jscrolJanel);
 		
 		
 		

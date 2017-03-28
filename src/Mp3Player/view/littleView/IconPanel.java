@@ -9,9 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
- * Í¼±êÀàµÄ°´Å¥
- * Êó±êÖ¸ÏòÊ±£¬ÏÔÊ¾img_active_urlÂ·¾¶ÏÂµÄÍ¼Æ¬£¬·ñÔòÏÔÊ¾img_unactive_urlÏÂµÄÍ¼Æ¬
- * µã»÷Ê±£¬¸ù¾İÉèÖÃµÄ¹ÌÓĞID£¬ÔÚChangeIconBGlistenerµÄµã»÷¼àÌıÆ÷ÖĞ¸ù¾İIDÖ´ĞĞÈÎÎñ
+ * å›¾æ ‡ç±»çš„æŒ‰é’®
+ * é¼ æ ‡æŒ‡å‘æ—¶ï¼Œæ˜¾ç¤ºimg_active_urlè·¯å¾„ä¸‹çš„å›¾ç‰‡ï¼Œå¦åˆ™æ˜¾ç¤ºimg_unactive_urlä¸‹çš„å›¾ç‰‡
+ * ç‚¹å‡»æ—¶ï¼Œæ ¹æ®è®¾ç½®çš„å›ºæœ‰IDï¼Œåœ¨ChangeIconBGlistenerçš„ç‚¹å‡»ç›‘å¬å™¨ä¸­æ ¹æ®IDæ‰§è¡Œä»»åŠ¡
  */
 public class IconPanel extends JPanel {
 	
@@ -31,6 +31,7 @@ public class IconPanel extends JPanel {
 		return id;
 	}
 
+ 	
 	public URL getImg_active_url() {
 		return img_active_url;
 	}
@@ -78,7 +79,7 @@ public class IconPanel extends JPanel {
 			   icon=new ImageIcon(img_active_url);
 		   else 
 			   icon=new ImageIcon(img_unactive_url);
-		   ((Graphics2D)g).drawImage(icon.getImage(), x, y, getSize().width,getSize().height, this);// Í¼Æ¬»á×Ô¶¯Ëõ·Å
+		   ((Graphics2D)g).drawImage(icon.getImage(), x, y, getSize().width,getSize().height, this);// å›¾ç‰‡ä¼šè‡ªåŠ¨ç¼©æ”¾
 	}
 
 }
