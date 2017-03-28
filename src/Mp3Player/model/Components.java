@@ -30,5 +30,6 @@ public class Components {
 	public static JLabel mySongSheet;
 	public static JScrollPane sheetScrollPane;
 	public static JPanel sheetPanel;
+	public static IconPanel addSheet;
 	
 }

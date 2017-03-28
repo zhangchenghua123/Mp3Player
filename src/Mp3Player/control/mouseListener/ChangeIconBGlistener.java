@@ -2,11 +2,19 @@ package Mp3Player.control.mouseListener;
 
 
 
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 import Mp3Player.control.action.pullMenu_onTitle;
+import Mp3Player.view.littleView.AddSheetDialog;
 import Mp3Player.view.littleView.IconPanel;
 
 /**
@@ -38,11 +46,15 @@ public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 //			Mp3Player.view.MainView.frame.add(pMenu_onTitle);
 			pMenu_onTitle.show(e.getComponent() , 0, 48);
 			break;
-		case 1:
+		case 1://最小化按钮
 			Mp3Player.model.Components.frame.setExtendedState(JFrame.ICONIFIED);
 			break;
-		case 2:
+		case 2://关闭按钮
 			System.exit(0);
+		case 3://添加歌单按钮
+			AddSheetDialog dialog=new AddSheetDialog(Mp3Player.model.Components.frame,"添加新列表");
+			
+			dialog.setVisible(true);
 		default:
 			break;
 		}
