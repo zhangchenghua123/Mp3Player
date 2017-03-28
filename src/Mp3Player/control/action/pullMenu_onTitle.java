@@ -49,7 +49,7 @@ public class pullMenu_onTitle extends JPopupMenu{
 				fileDialog.setAcceptAllFileFilterUsed(false);
 				fileDialog.setFileFilter(filter);
 				int returnType=-4;
-				returnType=fileDialog.showOpenDialog(Mp3Player.view.MainView.frame);//0：选择了文件  1：没有选择
+				returnType=fileDialog.showOpenDialog(Mp3Player.model.Components.frame);//0：选择了文件  1：没有选择
 				System.out.println(returnType);
 				System.out.println(fileDialog.getSelectedFile().toString());
 				if(returnType==1)

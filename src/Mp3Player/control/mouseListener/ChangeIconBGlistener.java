@@ -10,7 +10,8 @@ import Mp3Player.control.action.pullMenu_onTitle;
 import Mp3Player.view.littleView.IconPanel;
 
 /**
- * 小按钮，鼠标移上或移出以及点击时触发的动作
+ * 带图标的小按钮的监听事件
+ * 鼠标移上或移出以及点击时触发的动作
  * @author Berry
  *
  */
@@ -38,7 +39,7 @@ public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 			pMenu_onTitle.show(e.getComponent() , 0, 48);
 			break;
 		case 1:
-			Mp3Player.view.MainView.frame.setExtendedState(JFrame.ICONIFIED);
+			Mp3Player.model.Components.frame.setExtendedState(JFrame.ICONIFIED);
 			break;
 		case 2:
 			System.exit(0);

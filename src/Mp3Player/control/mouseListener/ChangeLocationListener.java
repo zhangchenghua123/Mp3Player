@@ -4,14 +4,19 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
+/**
+ * 标题栏titlepanel的监听
+ * 通过鼠标移动窗体
+ * @author Berry
+ *
+ */
 public class ChangeLocationListener implements MouseMotionListener,MouseListener{
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			// TODO Auto-generated method stub
-			Point point=Mp3Player.view.MainView.frame.getLocation();
-			Mp3Player.view.MainView.frame.setLocation(point.x-Mp3Player.view.MainView.originPoint.x+e.getX(), point.y+e.getY()-Mp3Player.view.MainView.originPoint.y);
+			Point point=Mp3Player.model.Components.frame.getLocation();
+			Mp3Player.model.Components.frame.setLocation(point.x-Mp3Player.view.MainView.originPoint.x+e.getX(), point.y+e.getY()-Mp3Player.view.MainView.originPoint.y);
 			
 		}
 

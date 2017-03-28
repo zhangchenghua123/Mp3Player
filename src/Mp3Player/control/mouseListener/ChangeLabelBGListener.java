@@ -11,7 +11,13 @@ import javax.swing.JLabel;
 import Mp3Player.GetResourceClass;
 import Mp3Player.model.OurValue;
 import Mp3Player.view.littleView.JLabelOnLeftPanel;
-
+/**
+ * 左侧列表显示label的监听事件
+ * 鼠标移上移出及点击时的动作
+ * 
+ * @author Berry
+ *
+ */
 public class ChangeLabelBGListener implements MouseListener,
 		MouseMotionListener {
 

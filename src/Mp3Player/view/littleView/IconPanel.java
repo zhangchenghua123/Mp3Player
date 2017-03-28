@@ -8,11 +8,13 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-
+/**
+ * 图标类的按钮
+ * 鼠标指向时，显示img_active_url路径下的图片，否则显示img_unactive_url下的图片
+ * 点击时，根据设置的固有ID，在ChangeIconBGlistener的点击监听器中根据ID执行任务
+ */
 public class IconPanel extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private boolean isActivite;
 	private URL img_active_url;

@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import java.awt.Insets;
 import java.awt.Point;
@@ -21,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -33,27 +35,11 @@ import Mp3Player.view.littleView.IconPanel;
 import Mp3Player.view.littleView.JLabelOnLeftPanel;
 
 
-
+import Mp3Player.model.Components;
 public  class MainView {
 
-	public static JFrame frame;
-	private Container mainContainer;//全部的区域
-	private JPanel titlePanel;//标题栏
-	public static Point originPoint;
-	private IconPanel iconPanel;//应用程序图标
-	private IconPanel pullPanel;//下拉菜单
-	private IconPanel littlePanel;//最小化图标
-	private IconPanel closePanel;//关闭图标
-	private JPanel bodyPanel;
-	private JPanel leftPanel;
-	private JPanel rightPanel;
-	private JPanel bottompPanel;
-	//左面板的东西
-	private JLabel myMusic;
-	private JLabelOnLeftPanel myLikeLabel;
-	private JLabelOnLeftPanel historyPlayingLabel;
-	private JLabelOnLeftPanel localLabe;
 	
+	public static Point originPoint;
 	int a=2;
 	URL img_active_url;
 	URL img_unactive_url;
@@ -62,34 +48,35 @@ public  class MainView {
 	 */
 	public MainView(){
 		//初始化frame
-		frame=new JFrame("Mp3Player");
+		Components.frame=new JFrame("Mp3Player");
 		originPoint=new Point();
-		frame.setSize(1280, 800);
-		frame.setUndecorated(true);
-		frame.setIconImage((new ImageIcon(GetResourceClass.class.getResource("image/music.png"))).getImage());
+		Components.frame.setSize(1280, 800);
+		Components.frame.setUndecorated(true);
+		Components.frame.setIconImage((new ImageIcon(GetResourceClass.class.getResource("image/music.png"))).getImage());
 		//重定义container
-		mainContainer =new Container();
-		mainContainer.setSize(1280, 800);
-		mainContainer.setLayout(null);
+		Components.mainContainer =new Container();
+		Components.mainContainer.setSize(1280, 800);
+		Components.mainContainer.setLayout(null);
 		addtitleBar();
 		addbody();
-		addLeftPanel();
-		frame.setContentPane(mainContainer);
-		frame.getContentPane().setVisible(true);
-		frame.setVisible(true);
+		addLeftTopPanel();
+		addLeftBottomPanel();
+		Components.frame.setContentPane(Components.mainContainer);
+		Components.frame.getContentPane().setVisible(true);
+		Components.frame.setVisible(true);
 		
-		iconPanel.addMouseListener(new ChangeLocationListener());
-		iconPanel.addMouseMotionListener(new ChangeLocationListener());
+		Components.iconPanel.addMouseListener(new ChangeLocationListener());
+		Components.iconPanel.addMouseMotionListener(new ChangeLocationListener());
 		
-		titlePanel.addMouseListener(new ChangeLocationListener());
-		titlePanel.addMouseMotionListener(new ChangeLocationListener());
+		Components.titlePanel.addMouseListener(new ChangeLocationListener());
+		Components.titlePanel.addMouseMotionListener(new ChangeLocationListener());
 		
-		pullPanel.addMouseListener(new ChangeIconBGlistener());
-		pullPanel.addMouseMotionListener(new ChangeIconBGlistener());
-		littlePanel.addMouseListener(new ChangeIconBGlistener());
-		littlePanel.addMouseMotionListener(new ChangeIconBGlistener());
-		closePanel.addMouseListener(new ChangeIconBGlistener());
-		closePanel.addMouseMotionListener(new ChangeIconBGlistener());
+		Components.pullPanel.addMouseListener(new ChangeIconBGlistener());
+		Components.pullPanel.addMouseMotionListener(new ChangeIconBGlistener());
+		Components.littlePanel.addMouseListener(new ChangeIconBGlistener());
+		Components.littlePanel.addMouseMotionListener(new ChangeIconBGlistener());
+		Components.closePanel.addMouseListener(new ChangeIconBGlistener());
+		Components.closePanel.addMouseMotionListener(new ChangeIconBGlistener());
 		
 	}
 	public static void main(String[] args) {
@@ -99,39 +86,39 @@ public  class MainView {
 	public void addtitleBar(){
 		//初始化titlePanel
 				img_active_url = GetResourceClass.class.getResource("image/title_bg.jpg");
-				titlePanel=new IconPanel(-1,img_active_url,img_active_url);
-				titlePanel.setOpaque(true ); 
-				titlePanel.setBounds(0, 0, 1280,60 );
-				titlePanel.setBackground(new Color(00,195,195));
+				Components.titlePanel=new IconPanel(-1,img_active_url,img_active_url);
+				Components.titlePanel.setOpaque(true ); 
+				Components.titlePanel.setBounds(0, 0, 1280,60 );
+				Components.titlePanel.setBackground(new Color(00,195,195));
 				img_active_url = GetResourceClass.class.getResource("image/music.png");
-				iconPanel=new IconPanel(-1, img_active_url, img_active_url);
-				iconPanel.setPreferredSize(new Dimension(48, 48));
-				iconPanel.setOpaque(false);
+				Components.iconPanel=new IconPanel(-1, img_active_url, img_active_url);
+				Components.iconPanel.setPreferredSize(new Dimension(48, 48));
+				Components.iconPanel.setOpaque(false);
 				img_active_url = GetResourceClass.class.getResource("image/pull_active.png");
 				img_unactive_url = GetResourceClass.class.getResource("image/pull_unactive.png");
-				pullPanel=new IconPanel(0, img_active_url, img_unactive_url);
-				pullPanel.setPreferredSize(new Dimension(32,32));
-				pullPanel.setOpaque(false);
+				Components.pullPanel=new IconPanel(0, img_active_url, img_unactive_url);
+				Components.pullPanel.setPreferredSize(new Dimension(32,32));
+				Components.pullPanel.setOpaque(false);
 				img_active_url = GetResourceClass.class.getResource("image/little_active.png");
 				img_unactive_url = GetResourceClass.class.getResource("image/little_unactive.png");
-				littlePanel=new IconPanel(1, img_active_url, img_unactive_url);
-				littlePanel.setOpaque(false);
+				Components.littlePanel=new IconPanel(1, img_active_url, img_unactive_url);
+				Components.littlePanel.setOpaque(false);
 				img_active_url = GetResourceClass.class.getResource("image/close_active.png");
 				img_unactive_url = GetResourceClass.class.getResource("image/close_unactive.png");
-				littlePanel.setPreferredSize(new Dimension(32, 32));
-				closePanel=new IconPanel(2, img_active_url, img_unactive_url);
-				closePanel.setOpaque(false);
-				closePanel.setPreferredSize(new Dimension(32, 32));
-				iconPanel.setFocusable(false);
+				Components.littlePanel.setPreferredSize(new Dimension(32, 32));
+				Components.closePanel=new IconPanel(2, img_active_url, img_unactive_url);
+				Components.closePanel.setOpaque(false);
+				Components.closePanel.setPreferredSize(new Dimension(32, 32));
+				Components.iconPanel.setFocusable(false);
 //				iconPanel.setBounds(10, 20, 32, 32);
 //				iconPanel.setOpaque(true);
 				
 				GridBagLayout layout=new GridBagLayout();
-				titlePanel.setLayout(layout);
-				titlePanel.add(iconPanel);
-				titlePanel.add(pullPanel);
-				titlePanel.add(littlePanel);
-				titlePanel.add(closePanel);
+				Components.titlePanel.setLayout(layout);
+				Components.titlePanel.add(Components.iconPanel);
+				Components.titlePanel.add(Components.pullPanel);
+				Components.titlePanel.add(Components.littlePanel);
+				Components.titlePanel.add(Components.closePanel);
 				GridBagConstraints s=new GridBagConstraints();
 				s.fill=GridBagConstraints.NONE;
 				s.gridx = 0;
@@ -142,7 +129,7 @@ public  class MainView {
 				s.ipady=1;
 				s.anchor=GridBagConstraints.WEST;
 				s.insets=new Insets(8, 10, 0, 0);
-				titlePanel.add(iconPanel, s);
+				Components.titlePanel.add(Components.iconPanel, s);
 				s.gridx = 1;
 		        s.gridy = 0;
 				s.weightx=1;
@@ -151,7 +138,7 @@ public  class MainView {
 				s.ipady=1;
 				s.anchor=GridBagConstraints.WEST;
 				s.insets=new Insets(8, 10, 0, 0);
-				titlePanel.add(pullPanel, s);
+				Components.titlePanel.add(Components.pullPanel, s);
 				
 				
 				s.gridx = 2;
@@ -159,55 +146,56 @@ public  class MainView {
 				s.gridwidth=1;
 				s.weightx=0;
 				s.weighty=0;
-				titlePanel.add(littlePanel, s);
+				Components.titlePanel.add(Components.littlePanel, s);
 				s.gridx = 3;
 		        s.gridy = 0;
 				s.gridwidth=2;
 				s.weightx=0;
 				s.weighty=0;
 				s.insets=new Insets(0, 15, 0, 40);
-				titlePanel.add(closePanel, s);
-				mainContainer.add(titlePanel);
+				Components.titlePanel.add(Components.closePanel, s);
+				Components.mainContainer.add(Components.titlePanel);
 				
 	}
 	public void addbody(){
 
-		bodyPanel=new JPanel();
-		bodyPanel.setBounds(0, 60,1280 , 740);
-		bodyPanel.setBackground(new Color(255,255,255));
+		Components.bodyPanel=new JPanel();
+		Components.bodyPanel.setBounds(0, 60,1280 , 740);
+		Components.bodyPanel.setBackground(new Color(255,255,255));
 //		bodyPanel.setBorder(BorderFactory.createEtchedBorder());
-		bodyPanel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(96,188,253)));
-		bodyPanel.setLayout(null);
-		leftPanel=new JPanel();
-		leftPanel.setForeground(new Color(240,248,255));
-		leftPanel.setBounds(5, 5, 250,600);
+		Components.bodyPanel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(96,188,253)));
+		Components.bodyPanel.setLayout(null);
+		Components.leftPanel=new JPanel();
+		Components.leftPanel.setForeground(new Color(240,248,255));
+		Components.leftPanel.setBounds(5, 5, 250,600);
 //		leftPanel.setPreferredSize(new Dimension(110,10));
-		rightPanel=new JPanel();
-		rightPanel.setBackground(new Color(0,255,0));
-		rightPanel.setBounds(255, 5,1020, 600);
+		Components.rightPanel=new JPanel();
+		Components.rightPanel.setBackground(new Color(0,255,0));
+		Components.rightPanel.setBounds(255, 5,1020, 600);
 //		rightPanel.setPreferredSize(new Dimension(110,10));
-		bottompPanel=new JPanel();
-		bottompPanel.setBackground(new Color(0,0,255));
-		bottompPanel.setBounds(5, 605, 1270, 140);
+		Components.bottompPanel=new JPanel();
+		Components.bottompPanel.setBackground(new Color(0,0,255));
+		Components.bottompPanel.setBounds(5, 605, 1270, 140);
 //		bottompPanel.setPreferredSize(new Dimension(110,10));
-		bodyPanel.add(leftPanel);
-		bodyPanel.add(rightPanel);
-		bodyPanel.add(bottompPanel);
+		Components.bodyPanel.add(Components.leftPanel);
+		Components.bodyPanel.add(Components.rightPanel);
+		Components.bodyPanel.add(Components.bottompPanel);
 		
 		
 		
 		
 		
 		
-		mainContainer.add(bodyPanel);
+		Components.mainContainer.add(Components.bodyPanel);
 	}
-	public void addLeftPanel(){
-		leftPanel.setLayout(null);
-		myMusic=new JLabel("我的音乐");
-		myMusic.setFont(OurValue.getFont());
-		myMusic.setForeground(new Color(196,196,196));
-		myMusic.setBounds(20,20,220,20);
-		leftPanel.add(myMusic);
+	public void addLeftTopPanel(){
+		Components.leftPanel.setLayout(null);
+		Components.myMusic=new JLabel("我的音乐");
+		Components.myMusic.setFont(OurValue.getFont());
+		Components.myMusic.setForeground(new Color(196,196,196));
+		Components.myMusic.setBounds(0,0,250,60);
+		Components.myMusic.setBorder(new EmptyBorder(20,20,5,0));
+		Components.leftPanel.add(Components.myMusic);
 		
 		ArrayList<Map<String, String>> lefttopList=new ArrayList<Map<String,String>>();
 		HashMap<String, String> map1=new HashMap<String, String>();
@@ -227,39 +215,42 @@ public  class MainView {
 			label.setFont(OurValue.getFont());
 			label.setOpaque(true);
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource(lefttopList.get(i).get("location"))));
-			label.setBounds(0, 45+i*40, 250, 40);
+			label.setBounds(0, 60+i*40, 250, 40);
 			label.setBorder(new EmptyBorder(0,30,0,0));
 			label.addMouseListener(new ChangeLabelBGListener());
 			label.addMouseMotionListener(new ChangeLabelBGListener());
-			leftPanel.add(label);
+			Components.leftPanel.add(label);
 		}
-//		myLikeLabel=new JLabelOnLeftPanel(1, "我喜欢");
-//		myLikeLabel.setFont(OurValue.getFont());
-//		myLikeLabel.setOpaque(true);
-//		myLikeLabel.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/mylike_unactive.png")));
-//		myLikeLabel.setBounds(0, 45, 250, 40);
-//		myLikeLabel.setBorder(new EmptyBorder(0,30,0,0));
-//		myLikeLabel.addMouseListener(new ChangeLabelBGListener());
-//		myLikeLabel.addMouseMotionListener(new ChangeLabelBGListener());
-//		leftPanel.add(myLikeLabel);
-//		historyPlayingLabel=new JLabelOnLeftPanel(2, "播放历史");
-//		historyPlayingLabel.setFont(OurValue.getFont());
-//		historyPlayingLabel.setOpaque(true);
-//		historyPlayingLabel.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/history_unactive.png")));
-//		historyPlayingLabel.setBounds(0, 85, 250, 40);
-//		historyPlayingLabel.setBorder(new EmptyBorder(0,30,0,0));
-//		historyPlayingLabel.addMouseListener(new ChangeLabelBGListener());
-//		historyPlayingLabel.addMouseMotionListener(new ChangeLabelBGListener());
-//		leftPanel.add(historyPlayingLabel);
-//		localLabe=new JLabelOnLeftPanel(2, "播放历史");
-//		localLabe.setFont(OurValue.getFont());
-//		localLabe.setOpaque(true);
-//		localLabe.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/history_unactive.png")));
-//		localLabe.setBounds(0, 85, 250, 40);
-//		localLabe.setBorder(new EmptyBorder(0,30,0,0));
-//		localLabe.addMouseListener(new ChangeLabelBGListener());
-//		localLabe.addMouseMotionListener(new ChangeLabelBGListener());
-//		leftPanel.add(historyPlayingLabel);
 	}
-	
+	public void addLeftBottomPanel(){
+		Components.mySongSheet=new JLabel("我的歌单");
+		Components.mySongSheet.setFont(OurValue.getFont());
+		Components.mySongSheet.setForeground(new Color(196,196,196));
+		Components.mySongSheet.setBounds(0,180,150,60);
+		Components.mySongSheet.setBorder(new EmptyBorder(20,20,5,0));
+		Components.leftPanel.add(Components.mySongSheet);
+		Components.sheetPanel=new JPanel();
+		Components.sheetPanel.setLocation(new Point(0,240));//setBounds(0, 240, 250, 250);
+		Components.sheetPanel.setPreferredSize(new Dimension(230,1000));
+		Components.sheetPanel.setLayout(new GridLayout(20,1));
+		for(int i=0;i<20;i++){
+			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i+4,"歌单"+i);
+			label.setFont(OurValue.getFont());
+			label.setOpaque(true);
+			label.setBounds(0, 240+40*i, 230, 40);
+			label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/local_unactive.png")));
+//			label.setBorder(new EmptyBorder(0,30,0,0));
+			label.addMouseListener(new ChangeLabelBGListener());
+			label.addMouseMotionListener(new ChangeLabelBGListener());
+			Components.sheetPanel.add(label);
+		}
+		JScrollPane jscrolJanel = new JScrollPane(Components.sheetPanel);
+		jscrolJanel.setBounds(0, 240, 250, 250);
+		jscrolJanel.setBorder(null);
+//		jscrolJanel.setViewportView(Components.sheetPanel);
+		Components.leftPanel.add(jscrolJanel);
+		
+		
+		
+	}
 }
