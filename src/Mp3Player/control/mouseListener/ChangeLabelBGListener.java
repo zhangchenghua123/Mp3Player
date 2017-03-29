@@ -4,11 +4,9 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import Mp3Player.GetResourceClass;
+import Mp3Player.control.action.PopupMenuOnSheets;
 import Mp3Player.model.OurValue;
 import Mp3Player.view.littleView.JLabelOnLeftPanel;
 /**
@@ -40,7 +38,7 @@ public class ChangeLabelBGListener implements MouseListener,
 		//恢复上一个点击的label
 		label=OurValue.getLastActiveLabel();
 		if(label!=null){
-			if(label.getId()==((JLabelOnLeftPanel)(e.getComponent())).getId())
+			if(label.getId()==((JLabelOnLeftPanel)(e.getComponent())).getId()&&e.getButton()==MouseEvent.BUTTON1)
 				return;
 			switch(label.getId()){
 			case 1:
@@ -52,6 +50,8 @@ public class ChangeLabelBGListener implements MouseListener,
 				break;
 			case 3:
 				label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/local_unactive.png")));
+			default:
+				label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/sheet_unactive.png")));
 			}
 			label.setBackground(null);
 			label.repaint();
@@ -70,10 +70,20 @@ public class ChangeLabelBGListener implements MouseListener,
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/local_active.png")));
 			break;
 		default:
+			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/sheet_active.png")));
 			break;
 		}
 		label.setBackground(new Color(255,0,0));
 		label.repaint();
+		if(e.getButton()==MouseEvent.BUTTON1){
+			//单击，同步右边的歌曲列表
+		}
+		else if(e.getButton()==MouseEvent.BUTTON3&&label.getId()>3){ //右键，且是我的列表那块，不是我喜欢的那块那的
+			//右击，在指针处弹出菜单
+			PopupMenuOnSheets popupMenuOnSheets=new PopupMenuOnSheets();
+			popupMenuOnSheets.setLocation(e.getPoint());
+			popupMenuOnSheets.show(label, e.getX(), e.getY());
+		}
 	}
 
 	@Override

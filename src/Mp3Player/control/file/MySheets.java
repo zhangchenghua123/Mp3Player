@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 
-import javax.sound.midi.VoiceStatus;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,6 +19,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.w3c.dom.Node;
+
 
 import Mp3Player.model.Components;
 
@@ -60,8 +61,8 @@ public class MySheets {
 		Element root=document.getDocumentElement();
 		NodeList list=root.getElementsByTagName("sheet");
 		for(int i=0;i<list.getLength();i++){
-			Components.mySongSheetList.add(((Element)(list.item(i))).getAttribute("name"));
-			System.out.println("aaaa"+Components.mySongSheetList.get(i));
+			Components.mySongSheetsNameList.add(((Element)(list.item(i))).getAttribute("name"));
+			System.out.println("aaaa"+Components.mySongSheetsNameList.get(i));
 		}
 	}
 	/**
@@ -81,7 +82,7 @@ public class MySheets {
 		Element root=document.getDocumentElement();
 		Element newElement=document.createElement("sheet");
 		newElement.setAttribute("name",name);
-		Components.mySongSheetList.add(name);
+		Components.mySongSheetsNameList.add(name);
 		root.appendChild(newElement);
 		updateLocalFile(document, "d:\\mySheets.xml");
 	}
@@ -89,6 +90,24 @@ public class MySheets {
 	 * 删除一个列表名
 	 */
 	public static void deleteSheet(String name){
+		try {
+			document = builder.parse(new File("d:\\mySheets.xml"));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Element root=document.getDocumentElement();
+		NodeList list=root.getElementsByTagName("sheet");
+		for(int i=0;i<list.getLength();i++){
+			Node node=list.item(i);
+			if(((Element)(list.item(i))).getAttribute("name").equals(name)){
+				root.removeChild(node);
+				updateLocalFile(document, "d:\\mySheets.xml");
+			}
+		}
 		
 	}
 	/**

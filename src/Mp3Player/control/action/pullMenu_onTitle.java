@@ -23,11 +23,11 @@ public class pullMenu_onTitle extends JPopupMenu{
 	JMenuItem openFile;
 	JMenuItem openFolder;
 	public  pullMenu_onTitle() {
-		JMenu open=new JMenu("´ò¿ª");
+		JMenu open=new JMenu("æ‰“å¼€");
 		open.setFont(OurValue.getFont());
-		openFile=new JMenuItem("ÎÄ¼þ");
+		openFile=new JMenuItem("æ–‡ä»¶");
 		openFile.setFont(OurValue.getFont());
-		openFolder=new JMenuItem("ÎÄ¼þ¼Ð");
+		openFolder=new JMenuItem("æ–‡ä»¶å¤¹");
 		openFolder.setFont(OurValue.getFont());
 		open.add(openFile);
 		open.add(openFolder);
@@ -49,12 +49,12 @@ public class pullMenu_onTitle extends JPopupMenu{
 				fileDialog.setAcceptAllFileFilterUsed(false);
 				fileDialog.setFileFilter(filter);
 				int returnType=-4;
-				returnType=fileDialog.showOpenDialog(Mp3Player.model.Components.frame);//0£ºÑ¡ÔñÁËÎÄ¼þ  1£ºÃ»ÓÐÑ¡Ôñ
+				returnType=fileDialog.showOpenDialog(Mp3Player.model.Components.frame);//0ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½  1ï¿½ï¿½Ã»ï¿½ï¿½Ñ¡ï¿½ï¿½
 				System.out.println(returnType);
-				System.out.println(fileDialog.getSelectedFile().toString());
+//				System.out.println(fileDialog.getSelectedFile().toString());
 				if(returnType==1)
 				{
-					//»ñÈ¡Ñ¡ÔñµÄÂ·¾¶ºÍÎÄ¼þÃû£¬Ìí¼ÓÎÄ¼þµ½ÊÔÌýÁÐ±í
+					
 				}
 			}
 		});
@@ -68,7 +68,7 @@ public class pullMenu_onTitle extends JPopupMenu{
 				fileDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				if(fileDialog.showOpenDialog(null)==0)
 				{
-					//Ñ¡ÔñÎÄ¼þ¼Ð£¬½«ÎÄ¼þ¼ÐÖÐµÄÒôÀÖÎÄ¼þÊä³öµ½ÁÐ±í£¬Èç¹ûÒ»¸ö¶¼Ã»ÓÐ£¬¾ÍÌáÊ¾Ò»ÏÂÓÃ»§°É¡£
+					//Ñ¡ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±?ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ò»ï¿½ï¿½ï¿½Ã»ï¿½ï¿½É¡ï¿½
 					
 					
 				}

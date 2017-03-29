@@ -9,6 +9,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.border.EmptyBorder;
 
 import Mp3Player.GetResourceClass;
 import Mp3Player.control.action.pullMenu_onTitle;
@@ -61,15 +62,16 @@ public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 			if(dialog.isRight()){
 				System.out.println("ccc");
 				MySheets.AddSheet(dialog.getName());
-				int size=Components.mySongSheetList.size();
-				JLabelOnLeftPanel label=new JLabelOnLeftPanel(size+4,Components.mySongSheetList.get(size-1));
+				int size=Components.mySongSheetsNameList.size();
+				JLabelOnLeftPanel label=new JLabelOnLeftPanel(size+4,Components.mySongSheetsNameList.get(size-1));
 				label.setFont(OurValue.getFont());
 				label.setOpaque(true);
-				label.setBounds(30, 40*(size-1), 220, 40);
-				label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/local_unactive.png")));
+				label.setBounds(0, 40*(size-1), 250, 40);
+				label.setBorder(new EmptyBorder(0, 30, 0, 0));
+				label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/sheet_unactive.png")));
 				label.addMouseListener(new ChangeLabelBGListener());
 				label.addMouseMotionListener(new ChangeLabelBGListener());
-				Components.sheetPanel.setPreferredSize(new Dimension(220,Components.mySongSheetList.size()*40));
+				Components.sheetPanel.setPreferredSize(new Dimension(220,Components.mySongSheetsNameList.size()*40));
 				Components.sheetPanel.add(label);
 				
 				Components.sheetPanel.validate();

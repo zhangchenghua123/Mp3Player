@@ -7,7 +7,7 @@ import Mp3Player.control.file.MySheets;
 import Mp3Player.model.Components;
 public class Init {
 	public static void initialization(){
-		Components.mySongSheetList=new ArrayList<String>();
+		Components.mySongSheetsNameList=new ArrayList<String>();
 		MySheets.init();
 		MySheets.getAllSheets();
 		

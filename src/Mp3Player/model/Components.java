@@ -1,7 +1,7 @@
 package Mp3Player.model;
 
+import java.awt.Component;
 import java.awt.Container;
-import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -33,7 +33,13 @@ public class Components {
 	public static JScrollPane sheetScrollPane;
 	public static JPanel sheetPanel;
 	public static IconPanel addSheet;
-	public static ArrayList<String> mySongSheetList;
+	public static ArrayList<String> mySongSheetsNameList;
+	public static ArrayList<Component> mySongSheetLabelList;
 	public static JScrollPane jscrolJanel;
+	
+	//右面板的东西
+	public static JLabel sheetNameLabel;
+	public static JLabelOnLeftPanel playAllLabel;
+	
 	
 }

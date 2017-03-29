@@ -78,14 +78,14 @@ public class AddSheetDialog extends JDialog {
 					 * 如果没有，添加成功
 					 */
 					int i=0;
-					for(;i<Components.mySongSheetList.size();i++){
-						if(Components.mySongSheetList.get(i).equals(nameField.getText())){
+					for(;i<Components.mySongSheetsNameList.size();i++){
+						if(Components.mySongSheetsNameList.get(i).equals(nameField.getText())){
 							showinfoLabel.setText("该列表已存在！");
 							showinfoLabel.repaint();
 							break;
 						}
 					}
-					if(i==Components.mySongSheetList.size()){//没有找到重复的
+					if(i==Components.mySongSheetsNameList.size()){//没有找到重复的
 						isright=true;
 						getthis().setVisible(false);
 					}

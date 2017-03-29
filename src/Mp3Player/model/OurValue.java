@@ -15,6 +15,9 @@ public class OurValue {
 	public static Font getFont() {
 		return new Font("微软雅黑",Font.PLAIN,20);	
 	}
+	public static Font getBigFont() {
+		return new Font("微软雅黑",Font.PLAIN,30);	
+	}
 	/**
 	 * 
 	 * @return
