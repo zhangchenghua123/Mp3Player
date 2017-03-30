@@ -7,6 +7,9 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
 import Mp3Player.GetResourceClass;
 import Mp3Player.control.action.PopupMenuOnSheets;
+import Mp3Player.control.file.MySheets;
+import Mp3Player.control.file.MySongList;
+import Mp3Player.model.Components;
 import Mp3Player.model.OurValue;
 import Mp3Player.view.littleView.JLabelOnLeftPanel;
 /**
@@ -59,17 +62,23 @@ public class ChangeLabelBGListener implements MouseListener,
 		//修改当前点击的label
 		label=(JLabelOnLeftPanel)(e.getComponent());
 		OurValue.setLastActionLabel(label);
-		switch (label.getId()) {
+		String listName;
+		int id=label.getId();
+		switch (id) {
 		case 1:
+			listName="我喜欢";
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/mylike_active.png")));
 			break;
 		case 2:
+			listName="播放历史";
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/history_active.png")));
 			break;
 		case 3:
+			listName="本地歌曲";
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/local_active.png")));
 			break;
 		default:
+			listName=Components.mySongSheetsNameList.get(id-4);
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/sheet_active.png")));
 			break;
 		}
@@ -77,6 +86,9 @@ public class ChangeLabelBGListener implements MouseListener,
 		label.repaint();
 		if(e.getButton()==MouseEvent.BUTTON1){
 			//单击，同步右边的歌曲列表
+			Components.songList.clear();
+			MySongList.getsongsByListName(listName);
+			Components.songsListTable.repaint();
 		}
 		else if(e.getButton()==MouseEvent.BUTTON3&&label.getId()>3){ //右键，且是我的列表那块，不是我喜欢的那块那的
 			//右击，在指针处弹出菜单

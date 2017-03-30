@@ -3,11 +3,17 @@ package Mp3Player.model;
 import java.awt.Component;
 import java.awt.Container;
 import java.util.ArrayList;
+import java.util.Vector;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JTable;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import Mp3Player.view.littleView.IconPanel;
 import Mp3Player.view.littleView.JLabelOnLeftPanel;
@@ -28,7 +34,7 @@ public class Components {
 	public static JPanel bottompPanel;//下边的播放栏
 	
 	//左面板的东西
-	public static JLabel myMusic;
+	public static JLabel myMusic; //我的音乐
 	public static JLabel mySongSheet;
 	public static JScrollPane sheetScrollPane;
 	public static JPanel sheetPanel;
@@ -40,6 +46,19 @@ public class Components {
 	//右面板的东西
 	public static JLabel sheetNameLabel;
 	public static JLabelOnLeftPanel playAllLabel;
+	public static JButton playAllButton;
+	public static JTable songsListTable;
+	public static ArrayList<Vector<String>> songList;
+	
+	//下面板的东西
+	public static IconPanel lastSongPanel;
+	public static IconPanel nextSongPanel;
+	public static IconPanel playSongPanel;
+	public static JSlider playingSlider;
+	public static JLabel playingNameLabel;
+	public static JLabel playingTimeLabel;
 	
 	
 }
+
+	

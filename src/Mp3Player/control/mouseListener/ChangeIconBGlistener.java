@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
 import Mp3Player.GetResourceClass;
-import Mp3Player.control.action.pullMenu_onTitle;
+import Mp3Player.control.action.PullMenuOnTitleBar;
 import Mp3Player.control.file.MySheets;
 import Mp3Player.model.Components;
 import Mp3Player.model.OurValue;
@@ -45,7 +45,7 @@ public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 		// TODO Auto-generated method stub
 		switch (((IconPanel)e.getComponent()).getId()) {
 		case 0: //标题栏的下拉菜单
-			pullMenu_onTitle  pMenu_onTitle=new pullMenu_onTitle();
+			PullMenuOnTitleBar  pMenu_onTitle=new PullMenuOnTitleBar();
 //			Mp3Player.view.MainView.frame.add(pMenu_onTitle);
 			pMenu_onTitle.show(e.getComponent() , 0, 48);
 			break;
@@ -63,7 +63,7 @@ public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 				System.out.println("ccc");
 				MySheets.AddSheet(dialog.getName());
 				int size=Components.mySongSheetsNameList.size();
-				JLabelOnLeftPanel label=new JLabelOnLeftPanel(size+4,Components.mySongSheetsNameList.get(size-1));
+				JLabelOnLeftPanel label=new JLabelOnLeftPanel(size+3,Components.mySongSheetsNameList.get(size-1));
 				label.setFont(OurValue.getFont());
 				label.setOpaque(true);
 				label.setBounds(0, 40*(size-1), 250, 40);

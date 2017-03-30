@@ -9,11 +9,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Mp3Player.control.file.MySongList;
+import Mp3Player.model.Components;
 import Mp3Player.model.OurValue;
+import Mp3Player.view.Toast;
 
 
 
-public class pullMenu_onTitle extends JPopupMenu{
+public class PullMenuOnTitleBar extends JPopupMenu{
 
 	/**
 	 * 
@@ -22,7 +25,7 @@ public class pullMenu_onTitle extends JPopupMenu{
 	
 	JMenuItem openFile;
 	JMenuItem openFolder;
-	public  pullMenu_onTitle() {
+	public  PullMenuOnTitleBar() {
 		JMenu open=new JMenu("打开");
 		open.setFont(OurValue.getFont());
 		openFile=new JMenuItem("文件");
@@ -49,11 +52,21 @@ public class pullMenu_onTitle extends JPopupMenu{
 				fileDialog.setAcceptAllFileFilterUsed(false);
 				fileDialog.setFileFilter(filter);
 				int returnType=-4;
-				returnType=fileDialog.showOpenDialog(Mp3Player.model.Components.frame);//0��ѡ�����ļ�  1��û��ѡ��
+				returnType=fileDialog.showOpenDialog(Mp3Player.model.Components.frame);//0表示选择并确定  1取消或关闭
 				System.out.println(returnType);
-//				System.out.println(fileDialog.getSelectedFile().toString());
-				if(returnType==1)
+//				
+				if(returnType==0)
 				{
+					String fileName=fileDialog.getSelectedFile().toString();
+					System.out.println(fileName);
+					if(MySongList.addSongToList("本地歌曲", fileName)){
+						MySongList.addSongToList("播放历史", fileName);
+						new Toast(Components.frame, "文件已添加至本地歌曲列表", 1000,Toast.success).start();
+					}
+					else 
+						new Toast(Components.frame, "文件已存在，不能重复添加", 1000,Toast.error).start();
+						
+					
 					
 				}
 			}

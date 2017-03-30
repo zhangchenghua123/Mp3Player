@@ -78,13 +78,24 @@ public class AddSheetDialog extends JDialog {
 					 * 如果没有，添加成功
 					 */
 					int i=0;
+					if(nameField.getText().equals("我喜欢")
+							||nameField.getText().equals("播放历史")
+							||nameField.getText().equals("本地歌曲"))
+					{
+						showinfoLabel.setText("该列表已存在！");
+						showinfoLabel.repaint();
+						return;
+					}
+					
 					for(;i<Components.mySongSheetsNameList.size();i++){
-						if(Components.mySongSheetsNameList.get(i).equals(nameField.getText())){
+						if(Components.mySongSheetsNameList.get(i).equals(nameField.getText())
+								||i==-1){
 							showinfoLabel.setText("该列表已存在！");
 							showinfoLabel.repaint();
 							break;
 						}
 					}
+					
 					if(i==Components.mySongSheetsNameList.size()){//没有找到重复的
 						isright=true;
 						getthis().setVisible(false);
