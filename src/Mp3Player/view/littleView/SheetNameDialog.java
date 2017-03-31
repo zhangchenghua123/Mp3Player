@@ -21,7 +21,7 @@ import Mp3Player.model.OurValue;
  * @author Berry
  *
  */
-public class AddSheetDialog extends JDialog {
+public class SheetNameDialog extends JDialog {
 	JPanel panel;
 	JLabel label;
 	JTextField nameField;
@@ -29,8 +29,12 @@ public class AddSheetDialog extends JDialog {
 	JButton yesbButton;
 	JButton cancelButton;
 	boolean isright;
-	public AddSheetDialog(Frame owner, String title){
-		super(owner,title);
+	public static final int add=1;
+	public static final int rename=2;
+	public SheetNameDialog(Frame owner,final int type){
+		super(owner,"添加新列表");
+		if(type==rename)
+			setTitle("修改列表名");
 		isright=false;
 		setBounds(Mp3Player.model.Components.frame.getX()+300,
 				Mp3Player.model.Components.frame.getY()+ 200, 300, 200);
@@ -38,7 +42,7 @@ public class AddSheetDialog extends JDialog {
 		setResizable(false);
 		panel=new JPanel();
 		panel.setLayout(null);
-		label=new JLabel("请填写列表名：");
+		label=new JLabel();
 		label.setBounds(20,30,200,30);
 		label.setFont(OurValue.getFont());
 		nameField=new JTextField();
@@ -51,12 +55,21 @@ public class AddSheetDialog extends JDialog {
 		showinfoLabel=new JLabel("");
 		showinfoLabel.setBounds(200, 125, 200, 30);
 		showinfoLabel.setForeground(new Color(255,0,0));
+		
+		
+		switch(type){
+		case add:
+			label.setText("请填写列表名：");
+			break;
+		case rename:
+			label.setText("请填写新名称：");
+			break;
+		}
 		panel.add(nameField);
 		panel.add(label);
 		panel.add(yesbButton);
 		panel.add(cancelButton);
 		panel.add(showinfoLabel);
-//		panel.setPreferredSize(new Dimension(300, 200));
 		setContentPane(panel);
 		/**
 		 * 点击确定按钮
@@ -89,17 +102,15 @@ public class AddSheetDialog extends JDialog {
 					
 					for(;i<Components.mySongSheetsNameList.size();i++){
 						if(Components.mySongSheetsNameList.get(i).equals(nameField.getText())
-								||i==-1){
+								&&(type==add||(type==rename&&i!=OurValue.getLastActiveLabel().getId()))){
 							showinfoLabel.setText("该列表已存在！");
 							showinfoLabel.repaint();
-							break;
+							return;
 						}
 					}
-					
-					if(i==Components.mySongSheetsNameList.size()){//没有找到重复的
-						isright=true;
-						getthis().setVisible(false);
-					}
+					//没有找到重复的
+					isright=true;
+					getthis().setVisible(false);
 				}
 			}
 		});

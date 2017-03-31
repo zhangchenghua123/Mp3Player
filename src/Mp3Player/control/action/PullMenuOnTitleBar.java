@@ -3,6 +3,9 @@ package Mp3Player.control.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Vector;
+
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -61,6 +64,18 @@ public class PullMenuOnTitleBar extends JPopupMenu{
 					System.out.println(fileName);
 					if(MySongList.addSongToList("本地歌曲", fileName)){
 						MySongList.addSongToList("播放历史", fileName);
+						if(OurValue.getLastActiveLabel().getId()==1||OurValue.getLastActiveLabel().getId()==2)
+						{
+							Vector<String> vector=new Vector<String>();
+							vector.add(fileName);
+							vector.add(new File(fileName).getName());
+							vector.add(fileName.substring(fileName.lastIndexOf(".")+1));
+							vector.add("5:20");
+							vector.add("wo");
+							Components.songList.add(vector);
+							Components.songsListTable.repaint();
+						}
+						
 						new Toast(Components.frame, "文件已添加至本地歌曲列表", 1000,Toast.success).start();
 					}
 					else 

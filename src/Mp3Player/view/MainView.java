@@ -12,6 +12,8 @@ import java.awt.GridLayout;
 
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +41,7 @@ import Mp3Player.control.Init;
 import Mp3Player.control.mouseListener.ChangeIconBGlistener;
 import Mp3Player.control.mouseListener.ChangeLabelBGListener;
 import Mp3Player.control.mouseListener.ChangeLocationListener;
+import Mp3Player.control.mouseListener.tableListener;
 import Mp3Player.model.OurValue;
 import Mp3Player.model.TableValues;
 import Mp3Player.view.littleView.IconPanel;
@@ -225,7 +228,7 @@ public  class MainView {
 		map3.put("location", "image/local_unactive.png");
 		lefttopList.add(map3);
 		for(int i=0;i<lefttopList.size();i++){
-			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i+1,lefttopList.get(i).get("name"));
+			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i,lefttopList.get(i).get("name"));
 			label.setFont(OurValue.getFont());
 			label.setOpaque(true);
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource(lefttopList.get(i).get("location"))));
@@ -254,16 +257,16 @@ public  class MainView {
 		Components.leftPanel.add(Components.addSheet);
 		Components.sheetPanel=new JPanel();
 		Components.sheetPanel.setLocation(new Point(0,240));
-		Components.sheetPanel.setPreferredSize(new Dimension(250,Components.mySongSheetsNameList.size()*40));
+		Components.sheetPanel.setPreferredSize(new Dimension(250,(Components.mySongSheetsNameList.size()-3)*40));
 //		GridLayout gridLayout=new GridLayout(0,1);
 //		gridLayout.setColumns(1);
 //		gridLayout.setRows(Components.mySongSheetList.size());
 		Components.sheetPanel.setLayout(null);
-		for(int i=0;i<Components.mySongSheetsNameList.size();i++){
-			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i+4,Components.mySongSheetsNameList.get(i));
+		for(int i=3;i<Components.mySongSheetsNameList.size();i++){
+			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i,Components.mySongSheetsNameList.get(i));
 			label.setFont(OurValue.getFont());
 			label.setOpaque(true);
-			label.setBounds(0, 40*i, 250, 40);
+			label.setBounds(0, 40*(i-3), 250, 40);
 			label.setBorder(new EmptyBorder(0, 30, 0, 0));
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/sheet_unactive.png")));
 			label.addMouseListener(new ChangeLabelBGListener());
@@ -305,8 +308,12 @@ public  class MainView {
 		Components.songsListTable.setFillsViewportHeight(true);//填充高度
 		Components.songsListTable.setFont(OurValue.getFont());
 		
-		DefaultTableCellRenderer   r   =   new   DefaultTableCellRenderer();   
-		r.setHorizontalAlignment(JLabel.CENTER); 
+		DefaultTableCellRenderer   dRenderer   =   new   DefaultTableCellRenderer();   
+		
+		dRenderer.setHorizontalAlignment(JLabel.CENTER);
+		Components.songsListTable.setDefaultRenderer(Object.class, dRenderer);
+		DefaultTableCellRenderer   r   =   new   DefaultTableCellRenderer(); 
+		r.setHorizontalAlignment(JLabel.LEFT); 
 		TableColumn column1=Components.songsListTable.getColumn("文件名");
 		column1.setCellRenderer(r);
 		Components.songsListTable.setShowVerticalLines(false);
@@ -319,6 +326,8 @@ public  class MainView {
 		Components.songsListTable.getColumnModel().getColumn(1).setPreferredWidth(50);
 		Components.songsListTable.getColumnModel().getColumn(2).setPreferredWidth(150);
 		Components.songsListTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+		Components.songsListTable.addMouseListener(new tableListener());
+		Components.songsListTable.addMouseMotionListener(new tableListener());
 		JScrollPane jsp = new JScrollPane(Components.songsListTable);  
        jsp.setBounds(20, 90, 1000, 500);
        jsp.setBorder(new EmptyBorder(0,0,0,0));

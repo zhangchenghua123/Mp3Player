@@ -8,6 +8,7 @@ import Mp3Player.view.littleView.JLabelOnLeftPanel;
 public class OurValue {
 
 	static JLabelOnLeftPanel lastActivelabel;
+	static int row;
 	/**
 	 * 获取软件字体
 	 * @return
@@ -31,5 +32,11 @@ public class OurValue {
 	}
 	public static void setLastActionLabel(JLabelOnLeftPanel label){
 		lastActivelabel=label;
+	}
+	public static void setCurrentRow(int newrow){
+		row=newrow;
+	}
+	public static int getCurrentRow(){
+		return row;
 	}
 }

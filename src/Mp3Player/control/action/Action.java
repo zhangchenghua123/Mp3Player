@@ -18,12 +18,12 @@ public class Action {
 	 */
 	public static void updateMySheetsPanel(){
 		Components.sheetPanel.removeAll();
-		for(int i=0;i<Components.mySongSheetsNameList.size();i++){
-			Components.sheetPanel.setPreferredSize(new Dimension(250,Components.mySongSheetsNameList.size()*40));
-			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i+4,Components.mySongSheetsNameList.get(i));
+		for(int i=3;i<Components.mySongSheetsNameList.size();i++){
+			Components.sheetPanel.setPreferredSize(new Dimension(250,(Components.mySongSheetsNameList.size()-3)*40));
+			JLabelOnLeftPanel label=new JLabelOnLeftPanel(i,Components.mySongSheetsNameList.get(i));
 			label.setFont(OurValue.getFont());
 			label.setOpaque(true);
-			label.setBounds(0, 40*i, 250, 40);
+			label.setBounds(0, 40*(i-3), 250, 40);
 			label.setBorder(new EmptyBorder(0, 30, 0, 0));
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/sheet_unactive.png")));
 			label.addMouseListener(new ChangeLabelBGListener());

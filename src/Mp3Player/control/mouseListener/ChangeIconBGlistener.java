@@ -16,7 +16,7 @@ import Mp3Player.control.action.PullMenuOnTitleBar;
 import Mp3Player.control.file.MySheets;
 import Mp3Player.model.Components;
 import Mp3Player.model.OurValue;
-import Mp3Player.view.littleView.AddSheetDialog;
+import Mp3Player.view.littleView.SheetNameDialog;
 import Mp3Player.view.littleView.IconPanel;
 import Mp3Player.view.littleView.JLabelOnLeftPanel;
 
@@ -55,29 +55,29 @@ public class ChangeIconBGlistener implements MouseListener,MouseMotionListener{
 		case 2://关闭按钮
 			System.exit(0);
 		case 3://添加歌单按钮
-			AddSheetDialog dialog=new AddSheetDialog(Mp3Player.model.Components.frame,"添加新列表");
-			
+			SheetNameDialog dialog=new SheetNameDialog(Mp3Player.model.Components.frame,SheetNameDialog.add);
 			dialog.setVisible(true);
 			System.out.println("bbb");
 			if(dialog.isRight()){
 				System.out.println("ccc");
 				MySheets.AddSheet(dialog.getName());
+				Components.mySongSheetsNameList.add(dialog.getName());
 				int size=Components.mySongSheetsNameList.size();
-				JLabelOnLeftPanel label=new JLabelOnLeftPanel(size+3,Components.mySongSheetsNameList.get(size-1));
+				JLabelOnLeftPanel label=new JLabelOnLeftPanel(size-1,Components.mySongSheetsNameList.get(size-1));
 				label.setFont(OurValue.getFont());
 				label.setOpaque(true);
-				label.setBounds(0, 40*(size-1), 250, 40);
+				label.setBounds(0, 40*(size-4), 250, 40);
 				label.setBorder(new EmptyBorder(0, 30, 0, 0));
 				label.setIcon(new ImageIcon(GetResourceClass.class.getResource( "image/sheet_unactive.png")));
 				label.addMouseListener(new ChangeLabelBGListener());
 				label.addMouseMotionListener(new ChangeLabelBGListener());
-				Components.sheetPanel.setPreferredSize(new Dimension(220,Components.mySongSheetsNameList.size()*40));
+				Components.sheetPanel.setPreferredSize(new Dimension(220,(Components.mySongSheetsNameList.size()-3)*40));
 				Components.sheetPanel.add(label);
 				
 				Components.sheetPanel.validate();
 				Components.jscrolJanel.validate();
 				Components.jscrolJanel.repaint();
-				Components.jscrolJanel.getVerticalScrollBar().setValue(size*40);
+				Components.jscrolJanel.getVerticalScrollBar().setValue((size-3)*40);
 			}
 		default:
 			

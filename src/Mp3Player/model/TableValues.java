@@ -14,7 +14,7 @@ public class TableValues extends AbstractTableModel{
                return Components.songList.size();
      }
      public Object getValueAt(int rowIndex, int columnIndex) {
-               return Components.songList.get(rowIndex).get(columnIndex);
+               return Components.songList.get(rowIndex).get(columnIndex+1);
      }
      /**
       * 设置列名

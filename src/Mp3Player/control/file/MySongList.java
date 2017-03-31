@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -54,6 +55,91 @@ public class MySongList {
 	
 	
 	
+	
+	
+	/**
+	 * 找出一个歌曲名在一个哪些list里边
+	 * 
+	 */
+	public static ArrayList<String> isExistedInList(String songName){
+		ArrayList<String> lists=new ArrayList<String>();
+		try {
+			document = builder.parse(new File("d:\\mySongLists.xml"));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Element root=document.getDocumentElement();
+		//先判断有没有name是listname的节点
+		Element node = null;
+		NodeList list=root.getElementsByTagName("list");
+		for(int i=0;i<list.getLength();i++){
+			NodeList itemList=list.item(i).getChildNodes();
+			for(int k=0;k<itemList.getLength();k++){
+				if(itemList.item(k).getTextContent().equals(songName)){
+					lists.add(((Element)(list.item(i))).getAttribute("name"));
+					continue;
+				}
+			}
+		}
+		return lists;
+	}
+	/**
+	 * 修改列表名称
+	 */
+	public static void updateListName(String oldName,String newName){
+		try {
+			document = builder.parse(new File("d:\\mySongLists.xml"));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Element root=document.getDocumentElement();
+		//先判断有没有name是listname的节点
+		Element node = null;
+		NodeList list=root.getElementsByTagName("list");
+		for(int i=0;i<list.getLength();i++){
+			node=(Element) list.item(i);
+			if(node.getAttribute("name").equals(oldName)){
+				node.setAttribute("name", newName);
+				updateLocalFile(document, "d:\\mySongLists.xml");
+				return;
+			}
+		}
+	}
+	/**
+	 * 
+	 */
+	public static void deleteAllSongsFromListname(String listName){
+		try {
+			document = builder.parse(new File("d:\\mySongLists.xml"));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Element root=document.getDocumentElement();
+		//先判断有没有name是listname的节点
+		Element node = null;
+		NodeList list=root.getElementsByTagName("list");
+		boolean flag=false;
+		for(int i=0;i<list.getLength()&&!flag;i++){
+			node=(Element) list.item(i);
+			if(node.getAttribute("name").equals(listName)){
+				root.removeChild(node);
+				updateLocalFile(document, "d:\\mySongLists.xml");
+				return;
+			}
+		}
+	}
 	/**
 	 * 
 	 */
@@ -81,7 +167,7 @@ public class MySongList {
 					File file=new File(itemNode.getTextContent());
 					String fileName=file.getName();
 					Vector<String> vector=new Vector<String>();
-					
+					vector.add(fileName.toString());
 					vector.add(fileName);
 					vector.add(fileName.substring(fileName.lastIndexOf(".")+1));
 					vector.add("5:20");
@@ -208,4 +294,9 @@ public class MySongList {
 			e.printStackTrace();
 		}  
 	}
+	
 }
+
+
+
+

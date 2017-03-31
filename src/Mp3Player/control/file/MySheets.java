@@ -82,7 +82,6 @@ public class MySheets {
 		Element root=document.getDocumentElement();
 		Element newElement=document.createElement("sheet");
 		newElement.setAttribute("name",name);
-		Components.mySongSheetsNameList.add(name);
 		root.appendChild(newElement);
 		updateLocalFile(document, "d:\\mySheets.xml");
 	}
@@ -114,6 +113,25 @@ public class MySheets {
 	 * 更新一个列表名
 	 */
 	public static void updateSheet(String oldName,String newName){
+		try {
+			document = builder.parse(new File("d:\\mySheets.xml"));
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Element root=document.getDocumentElement();
+		NodeList list=root.getElementsByTagName("sheet");
+		for(int i=0;i<list.getLength();i++){
+			Element node=(Element) list.item(i);
+			if(node.getAttribute("name").equals(oldName)){
+				node.setAttribute("name", newName);
+				updateLocalFile(document, "d:\\mySheets.xml");
+				MySongList.updateListName(oldName, newName);
+			}
+		}
 		
 	}
 	/**

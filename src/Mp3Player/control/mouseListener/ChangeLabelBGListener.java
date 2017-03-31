@@ -44,14 +44,14 @@ public class ChangeLabelBGListener implements MouseListener,
 			if(label.getId()==((JLabelOnLeftPanel)(e.getComponent())).getId()&&e.getButton()==MouseEvent.BUTTON1)
 				return;
 			switch(label.getId()){
-			case 1:
+			case 0:
 				label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/mylike_unactive.png")));
 				
 				break;
-			case 2:
+			case 1:
 				label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/history_unactive.png")));
 				break;
-			case 3:
+			case 2:
 				label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/local_unactive.png")));
 			default:
 				label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/sheet_unactive.png")));
@@ -62,39 +62,33 @@ public class ChangeLabelBGListener implements MouseListener,
 		//修改当前点击的label
 		label=(JLabelOnLeftPanel)(e.getComponent());
 		OurValue.setLastActionLabel(label);
-		String listName;
 		int id=label.getId();
+		String listName=Components.mySongSheetsNameList.get(id);
 		switch (id) {
-		case 1:
-			listName="我喜欢";
+		case 0:
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/mylike_active.png")));
 			break;
-		case 2:
-			listName="播放历史";
+		case 1:
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/history_active.png")));
 			break;
-		case 3:
-			listName="本地歌曲";
+		case 2:
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/local_active.png")));
 			break;
 		default:
-			listName=Components.mySongSheetsNameList.get(id-4);
 			label.setIcon(new ImageIcon(GetResourceClass.class.getResource("image/sheet_active.png")));
 			break;
 		}
 		label.setBackground(new Color(255,0,0));
 		label.repaint();
-		if(e.getButton()==MouseEvent.BUTTON1){
-			//单击，同步右边的歌曲列表
-			Components.songList.clear();
-			MySongList.getsongsByListName(listName);
-			Components.songsListTable.repaint();
-		}
-		else if(e.getButton()==MouseEvent.BUTTON3&&label.getId()>3){ //右键，且是我的列表那块，不是我喜欢的那块那的
-			//右击，在指针处弹出菜单
-			PopupMenuOnSheets popupMenuOnSheets=new PopupMenuOnSheets();
-			popupMenuOnSheets.setLocation(e.getPoint());
-			popupMenuOnSheets.show(label, e.getX(), e.getY());
+        //同步右边的歌曲列表
+		Components.songList.clear();
+		MySongList.getsongsByListName(listName);
+		Components.songsListTable.repaint();
+		if(e.getButton()==MouseEvent.BUTTON3){ //右键，且是我的列表那块，不是我喜欢的那块那的
+		//右击，在指针处弹出菜单
+		PopupMenuOnSheets popupMenuOnSheets=new PopupMenuOnSheets(label.getId()<=2?PopupMenuOnSheets.up:PopupMenuOnSheets.down);
+		popupMenuOnSheets.setLocation(e.getPoint());
+		popupMenuOnSheets.show(label, e.getX(), e.getY());
 		}
 	}
 
@@ -114,7 +108,6 @@ public class ChangeLabelBGListener implements MouseListener,
 	public void mouseEntered(MouseEvent e) {
 		if(OurValue.getLastActiveLabel()!=(JLabelOnLeftPanel)(e.getComponent())){
 			((JLabelOnLeftPanel)(e.getComponent())).setBackground(new Color(240,248,255));
-//			((JLabelOnLeftPanel)(e.getComponent())).setIcon(new ImageIcon(GetResourceClass.class.getResource("image/mylike_active.png")));
 			e.getComponent().repaint();
 		}
 	}
@@ -125,7 +118,6 @@ public class ChangeLabelBGListener implements MouseListener,
 		// TODO Auto-generated method stub
 		if(OurValue.getLastActiveLabel()!=(JLabelOnLeftPanel)(e.getComponent())){
 			((JLabelOnLeftPanel)(e.getComponent())).setBackground(null);
-//			((JLabelOnLeftPanel)(e.getComponent())).setIcon(new ImageIcon(GetResourceClass.class.getResource("image/mylike_unactive.png")));
 			e.getComponent().repaint();
 		}
 	}
