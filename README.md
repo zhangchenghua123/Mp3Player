@@ -119,10 +119,10 @@ The original dataset had 17,202 records, and after data cleaning, there were 17,
 In this work,four different aggregate statistics are `MAX`, `MIN`,`COUNTIF`, and `MODE.SNGL`.`MIN` and `MAX` are used to calculate the minimun and maximum of the LATITUDE field, and the calculated results are 40.49617 and 40.90981, respectively. `COUNTIF` is used to count the number of possible values(1, 2, and 3) of the CATEGORY field. The result is:
 
 |value|desc|command|count|
-|-|-|-|-|-|
-|1||COUNTIF(I2:I17120,"=1")|12390|
-|2|Residential properties|COUNTIF(I2:I17120,"=1")|1279|
-|3|Properties with no current use|COUNTIF(I2:I17120,"=1")|3450|
+|-|-|-|-|
+|1|Non-residential properties with a current use|COUNTIF(I2:I17120,"=1")|12390|
+|2|Residential properties|COUNTIF(I2:I17120,"=2")|1279|
+|3|Properties with no current use|COUNTIF(I2:I17120,"=3")|3450|
 
 we can find that the Non-residential properties with a current use is the majority.
 
