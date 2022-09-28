@@ -109,3 +109,4 @@ with open('data/colp_202206.csv') as f:
                 row.update({key:conversion(row[key])})
         data.append(row)
 ```
+
