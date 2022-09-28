@@ -1,8 +1,8 @@
-#Introduction
+# Introduction
 
 &nbsp;&nbsp;&nbsp;&nbsp;A little assignment to practice finding data, munging it, and analyzing it in a spreadsheet program.
 
-## Dataset details
+# Dataset details
 
 &nbsp;&nbsp;&nbsp;&nbsp;The dataset I'm working with is "NYC City Owned and Leased Properties(COLP)", which is available as a geodatabase. It is a list of uses on city owned and leased properties that includes geographic information as well as the type of use, agency and other related information. The dataset is updated biannually.COLP is produced from an extract of the Integrated Property Information System (IPIS), a real estate database maintained by the Department of Citywide Administrative Services (DCAS). Except where indicated, the data provided is from IPIS. The dataset is available for download on the NYC department of city planning's[Bytes of the big Apple](https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-colp.pagec).The format of the original data file is **CSV format**.
 
@@ -34,9 +34,68 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;In this dataset, the most obvious problem is that in some rows, some necessary fields do not have data, such as the field "CD", which consists of three digits, the first of which is the borough code. The second and third digits are the community district or joint interest area  number. This field is empty in the second row of the dataset. Other fields such as "EXPANDCAT" have the same problem.
 
-&nbsp;&nbsp;&nbsp;&nbsp;In the data cleaning task, to solve this problem, I first looked at the documentation of the data set to understand the meaning of the individual fields and the data type, where the data type might be Integer, float, text, such as the field "CD" meaning, as described above, the data type is INTEGER. We generally believe that a field whose data type is INTEGER or float cannot have empty content, that is, there must be data. So in the code, all the fields in a row are evaluated. If the content is empty and the data type is int or float, then the row is incomplete and needs to be cleaned up.
+&nbsp;&nbsp;&nbsp;&nbsp;In the data cleaning task, to solve this problem, I first looked at the documentation of the data set to understand the meaning of the individual fields and the data type, where the data type might be Integer, float, text, such as the field "CD" meaning, as described above, the data type is INTEGER.First I define a list in the program: field_types. Each element in the list is a triplet. Each triplet contains the name of the field, the data type of the field, and whether the column in which the field is located is removed during data cleaning, with 0 indicating no removal and 1 indicating removal.
 
 ```
+field_types=[('uid',        str,    0),
+             ('BOROUGH',    str,    0),
+             ('BLOCK',      int,    0),
+             ('LOT',        int,    0),
+             ('BBL',        float,  0),
+             ('MAPBBL',     float,  0),
+             ('CD',         int,    0),
+             ('HNUM',       str,    0),
+             ('SNAME',      str,    1),
+             ('ADDRESS',    str,    1),
+             ('PARCELNAME', str,    1),
+             ('AGENCY',     str,    1),
+             ('USECODE',    str,    1),
+             ('USETYPE',    str,    1),
+             ('OWNERSHIP',  str,    1),
+             ('CATEGORY',   int,    0),
+             ('EXPANDCAT',  int,    0),
+             ('EXCATDESC',  str,    1),
+             ('LEASED',     str,    1),
+             ('FINALCOM',   str,    1),
+             ('AGREEMENT',  str,    1),
+             ('XCOORD',     int,    0),
+             ('YCOORD',     int,    0),
+             ('LATITUDE',   float,  0),
+             ('LONGITUDE',  float,  0),
+             ('DCPEDITED',  str,    1),
+             ('GEOM',       str,    1)]
+```
+
+We generally believe that a field whose data type is INTEGER or float cannot have empty content, that is, there must be data. So in the code, all the fields in a row are evaluated. If the content is empty and the data type is int or float, then the row is incomplete and needs to be cleaned up.
+
+
+```
+	def is_number(s):
+    	try:
+    	    if '.' in s:
+    	        float(s)
+    	    else:
+    	        int(s)
+    	    return True
+    	except ValueError:
+    	    pass
+    	return False
+	def verify(dic):
+    	for key,conversion,_ in field_types:
+    	    if conversion in [int,float] and not is_number(dic[key]):
+    	        return False
+    	return True
+```
+
+
+```
+def has_empty_field(dic):
+    for key,conversion,_ in field_types:
+        if dic[key]=='' and conversion in [int,float]:
+            return True
+    return False
+
+
 data=[]
 with open('data/colp_202206.csv') as f:
     # print(type(csv.DictReader(f)),len(csv.DictReader(f)))
