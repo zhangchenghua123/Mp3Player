@@ -31,3 +31,22 @@
 |00592c15ce0e778f06913f82541a9b80|3|25|12|3000250012.00000000|3000250012.00000000|302|11|WATER STREET|11 WATER STREET|UNDER BROOKLYN BRIDGE|DOT|0880|ROAD/HIGHWAY|C|1|7|"MAINTENANCE| STORAGE| & INFRASTRUCTURE USE"||||985923|195722|40.7038890|-73.9939660||0101000020D708000001E1A20786162E415754C23352E40741|
 |005ab5201d6004a37d4a4f284f1b81c3|1|323|2|1003230002.00000000|1003230002.00000000|103|326|DELANCEY STREET|326 DELANCEY STREET|PUBLIC BATH HOUSE|PARKS|0440|PARK|C|1|3|CULTURAL & RECREATIONAL USE||||990598|200443|40.7168440|-73.9771000||0101000020D708000059F0CF400C3B2E4137398390D7770841|
 |005b1079b39260a95463339eb5f05cb3|2|2302|12|2023020012.00000000|2023020012.00000000|201|383|EAST  140 STREET|383 EAST  140 STREET|PS 49 PLAYGROUND (JOP)|EDUC|0430|PLAYGROUND/SPORTS AREA|C|1|3|CULTURAL & RECREATIONAL USE||||1005456|234669|40.8107630|-73.9233940||0101000020D7080000F0BCA02920AF2E4129D7136D69A50C41|
+
+&nbsp;&nbsp;&nbsp;&nbsp;In this dataset, the most obvious problem is that in some rows, some necessary fields do not have data, such as the field "CD", which consists of three digits, the first of which is the borough code. The second and third digits are the community district or joint interest area  number. This field is empty in the second row of the dataset. Other fields such as "EXPANDCAT" have the same problem.
+
+&nbsp;&nbsp;&nbsp;&nbsp;In the data cleaning task, to solve this problem, I first looked at the documentation of the data set to understand the meaning of the individual fields and the data type, where the data type might be Integer, float, text, such as the field "CD" meaning, as described above, the data type is INTEGER. We generally believe that a field whose data type is INTEGER or float cannot have empty content, that is, there must be data. So in the code, all the fields in a row are evaluated. If the content is empty and the data type is int or float, then the row is incomplete and needs to be cleaned up.
+
+```
+data=[]
+with open('data/colp_202206.csv') as f:
+    # print(type(csv.DictReader(f)),len(csv.DictReader(f)))
+    for i,row in enumerate(csv.DictReader(f)):
+        if has_empty_field(row):
+            continue
+        for key,conversion,to_delete in field_types:
+            if to_delete==1:
+                row.pop(key)
+            else:
+                row.update({key:conversion(row[key])})
+        data.append(row)
+```
