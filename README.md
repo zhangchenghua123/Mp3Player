@@ -1,4 +1,4 @@
-##Introduction
+#Introduction
 
 &nbsp;&nbsp;&nbsp;&nbsp;A little assignment to practice finding data, munging it, and analyzing it in a spreadsheet program.
 
