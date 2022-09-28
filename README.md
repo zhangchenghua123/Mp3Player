@@ -80,6 +80,8 @@ We generally believe that a field whose data type is INTEGER or float cannot hav
     	except ValueError:
     	    pass
     	return False
+
+
 	def verify(dic):
     	for key,conversion,_ in field_types:
     	    if conversion in [int,float] and not is_number(dic[key]):
@@ -110,3 +112,33 @@ with open('data/colp_202206.csv') as f:
         data.append(row)
 ```
 
+The original dataset had 17,202 records, and after data cleaning, there were 17,119 records
+
+# Analisys
+
+In this work,four different aggregate statistics are `MAX`, `MIN`,`COUNTIF`, and `MODE.SNGL`.`MIN` and `MAX` are used to calculate the minimun and maximum of the LATITUDE field, and the calculated results are 40.49617 and 40.90981, respectively. `COUNTIF` is used to count the number of possible values(1, 2, and 3) of the CATEGORY field. The result is:
+
+|value|desc|command|count|
+|-|-|-|-|-|
+|1||COUNTIF(I2:I17120,"=1")|12390|
+|2|Residential properties|COUNTIF(I2:I17120,"=1")|1279|
+|3|Properties with no current use|COUNTIF(I2:I17120,"=1")|3450|
+
+we can find that the Non-residential properties with a current use is the majority.
+
+`MODE.SNGL` can also help us find the most frequent numbers in an area. The EXPANDCAT field 
+means expanded caterory. It's valid values are 1-9:
+
+|value|disc|
+|-|-|
+|1|Office use|
+|2|Educational use|
+|3|Cultural & recreational use|
+|4|Public safety & criminal justice use|
+|5|Health & social service use|
+|6|Leased out to a private tenant|
+|7|Maintenance, storage & infrastructure|
+|8|Property with no use|
+|9|Property with a residential used|
+
+when using `MODE.SNGL` on this field,we get 3,which means Cultural & recreational using is the majority in these categories.
